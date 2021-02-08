@@ -1,0 +1,8 @@
+
+protocol MovieUseCase {
+
+}
+
+class MovieInteractor {
+
+}
