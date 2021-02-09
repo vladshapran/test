@@ -1,7 +1,7 @@
 import UIKit
 
 class MovieModuleBuilder {
-  func build() -> UIViewController {
+  static func build(usingNavigationFactory factory: NavigationFactory) -> UINavigationController {
        
        let view = MovieVC()
        let presenter = MoviePresenter(interactor: interactor, router: router)
@@ -9,6 +9,6 @@ class MovieModuleBuilder {
        let interactor = MovieInteractor(service: NetworkService.shared)
        view.presenter = presenter
     
-       return view
+       return factory(view)
    }
 }
