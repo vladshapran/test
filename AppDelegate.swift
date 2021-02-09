@@ -9,9 +9,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        window = UIWindow(frame: UIScreen.main,bounds)
-        let initialVC = MovieModuleBuilder(usingNavigationFactory: NavigationBuilder.build)
-        window?.rootViewController = initialVC
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let submodules = (
+         movie: MovieModuleBuilder.build(usingNavigationFactory: NavigationBuilder.build) , 
+         favourites: FavouritesModuleBuilder.build(usingNavigationFactory: NavigationBuilder.build)
+        )
+       
+        let tabBarController = TabBarModuleBuilder.build(usingSubmodules: submodules)
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         return true
     }
