@@ -12,4 +12,8 @@ class CustomTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    func configurate(usingViewModel viewModel: MovieItemModel) -> Void {
+        self.nameMovie = viewModel.original_title
+    }
+    
 }
