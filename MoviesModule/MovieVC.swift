@@ -38,7 +38,6 @@ class MovieVC: UIViewController {
 
 extension MovieVC: MovieView {
   func updateMovie(movieList: [MovieItemModel]) {
-    print(movieList)
     self.datasource = movieList
     
   }
@@ -56,7 +55,7 @@ extension MovieVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = storyboard?.instantiateViewController(identifier: "DetailVC") as! DetailViewController
+        let detailVC = DetailsVC()
         detailVC.movie = datasource?.[indexPath.row]
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
