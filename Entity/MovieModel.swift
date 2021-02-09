@@ -1,3 +1,5 @@
+// MARK: -Data model.
+
 struct Result{
     let page: Int?
     let total_pages: Int?
