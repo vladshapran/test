@@ -19,10 +19,16 @@ class MoviePresenter {
 }
 
 extension MoviePresenter: MoviePresentation {
-  func viewDidLoad(){
-    self.interactor.getMovie(completion: { (result) in
-        let movieList = result.
-    })
+  func viewDidLoad() {
+    
+    DispatchQueue.global(qos: .background).async { [weak self] in 
+      self?.interactor.getMovie(completion: { (result) in
+        let movieList = result.results.compactMap( { MovieItemModel(using: $0)})
+        DispatchQueue.main.async {
+          self?.view?.updateMovie(movieList: movieList)
+        }                                  
+      })
+    }
   }
 }
 
