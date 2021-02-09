@@ -1,8 +1,17 @@
 import UIKit
 
+tepealias MovieTabs = (
+  movie: UIViewController,
+  favourites: UIViewController
+)
+
 class TabBarController: UITabBarController {
-  init() {
-    super.init()
+  
+  let tabBarController = UITabBarController() 
+  init(tabs: MovieTabs) {
+    super.init(nibName: nil, bundle: nil)
+    
+    viewControllers = [tabs.movie, tabs.favourites]
   }
   
   required init?(coder aDecoder: NSDecoder) {
