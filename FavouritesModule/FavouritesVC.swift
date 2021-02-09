@@ -4,11 +4,20 @@ class FavouritesVC: UIViewController {
   
   let tableView = UITableView()
   let movieCell = "CustomMovieTableViewCell
+  var favMovie = [Movie]()
+  var delegate: FavouriteMovieDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     createTableView()
   }
+  
+  override func viewDidAppear(_ animated: Bool) {
+        if let favouriteMoie = self.delegate?.favouriteMovies() {
+            self.favMovie = favouriteMovie
+        }
+    }
+  
   
   func createTableView() {
         view.addSubview(tableView)
