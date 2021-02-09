@@ -2,6 +2,7 @@ import UIKit
 
 protocol MovieView: class {
   func updateMovie(movieList: [MovieItemModel]) -> ()
+  func favouriteMovies() -> [MovieItemModel]
 }
 
 class MovieVC: UIViewController {
@@ -11,6 +12,7 @@ class MovieVC: UIViewController {
         self.tableView.reloadData()
       }
     }
+    let favouriteMovie:  [MovieItemModel] = []
     let tableView = UITableView()
     let movieCell = "CustomMovieTableViewCell"
   
@@ -18,6 +20,8 @@ class MovieVC: UIViewController {
     super.viewDidLoad()
     self.presenter?.viewDidLoad()
     createTableView()
+    let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(sender:)))
+    self.view.addGestureRecognizer(longPressRecognizer)
   }
   
   func createTableView() {
@@ -34,12 +38,23 @@ class MovieVC: UIViewController {
       
     }
   
+  @objc func longPressed(sender: UILongPressGestureRecognizer) {
+
+        if sender.state == UIGestureRecognizer.State.began {
+            let touchPoint = sender.location(in: self.tableView)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                favouriteMovie.append(datasource?.[indexPath.row])
+            }
+        }
+    }
 } 
 
 extension MovieVC: MovieView {
   func updateMovie(movieList: [MovieItemModel]) {
     self.datasource = movieList
-    
+  }
+  func favouriteMovies() -> [MovieItemModel] {
+    return self.favouriteMovie
   }
 }
 
