@@ -10,7 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
         window = UIWindow(frame: UIScreen.main,bounds)
-        let initialVC = MovieModuleBuilder()
+        let initialVC = MovieModuleBuilder(usingNavigationFactory: NavigationBuilder.build)
         window?.rootViewController = initialVC
         window?.makeKeyAndVisible()
         return true
